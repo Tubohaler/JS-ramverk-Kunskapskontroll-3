@@ -1,23 +1,5 @@
-import { ThemeProvider, makeStyles, fade } from "tss-react/mui";
-
-// const drawerWidth = 240;
-
-// export default makeStyles((theme) => ({
-//   appBar: {
-//     boxShadow: 'none',
-//     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-//     [theme.breakpoints.up('sm')]: {
-//       width: `calc(100% - ${drawerWidth}px)`,
-//       marginLeft: drawerWidth,
-//     },
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2),
-//     [theme.breakpoints.up('sm')]: {
-//       display: 'none',
-//     },
-//   },
-// }));
+import { makeStyles } from "@mui/styles";
+import { ThemeProvider, alpha } from "@mui/material/styles";
 
 const drawerWidth = 0;
 
@@ -51,15 +33,14 @@ export default makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      // marginLeft: theme.spacing(3),
       width: "auto",
     },
   },
@@ -83,18 +64,6 @@ export default makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: "20ch",
-    },
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
     },
   },
 }));

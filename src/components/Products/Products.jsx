@@ -1,8 +1,8 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 
-import Product from "./Product/Product.jsx";
-import useStyles from "./styles";
+import Product from "./Product/Product";
+import { styled } from "@mui/material/styles";
 
 const products = [
   {
@@ -23,8 +23,20 @@ const products = [
   },
 ];
 
+const item = styled((theme) => ({
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+  },
+  root: {
+    flexGrow: 1,
+  },
+}));
+
 const Products = () => {
-  const classes = useStyles();
+  const classes = styled();
 
   return (
     <main className={classes.content}>

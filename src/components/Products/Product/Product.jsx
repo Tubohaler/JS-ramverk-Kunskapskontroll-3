@@ -1,18 +1,35 @@
 import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import { AddShoppingCart } from "@mui/icons-material";
 
-import useStyles from "./styles";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import { styled } from "@mui/material/styles";
+
+const Product = styled(() => ({
+  root: {
+    maxWidth: "100%",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", //16:9
+  },
+  cardActions: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  cardContent: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+}));
 
 const Product = ({ product }) => {
-  const classes = useStyles();
+  const classes = styled();
 
   return (
     <div>
@@ -35,7 +52,7 @@ const Product = ({ product }) => {
         </CardContent>
         <CardActions disableSpacing className={classes.CardActions}>
           <IconButton aria-label="Add to the Cart">
-            <AddShoppingCart />
+            <AddShoppingCartIcon />
           </IconButton>
         </CardActions>
       </Card>
