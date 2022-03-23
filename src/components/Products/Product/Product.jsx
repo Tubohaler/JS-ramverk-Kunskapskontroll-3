@@ -8,49 +8,23 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-import { styled } from "@mui/material/styles";
-
-const Product = styled(() => ({
-  root: {
-    maxWidth: "100%",
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", //16:9
-  },
-  cardActions: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  cardContent: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-}));
-
 const Product = ({ product }) => {
-  const classes = styled();
-
   return (
     <div>
-      <Card className={classes.root}>
-        <CardMedia
-          className={classes.media}
-          image={product.image}
-          title={product.name}
-        />
+      <Card>
+        <CardMedia image={product.image} title={product.name} component="img" />
         <CardContent>
           <div>
             <Typography variant="h5" gutterBottom>
-              {Product.name}
+              {product.name}
             </Typography>
-            <Typography variant="h5">{Product.price}</Typography>
+            <Typography variant="h5">{product.price}</Typography>
           </div>
           <Typography variant="body2" color="textSecondary">
             {product.description}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing className={classes.CardActions}>
+        <CardActions disableSpacing>
           <IconButton aria-label="Add to the Cart">
             <AddShoppingCartIcon />
           </IconButton>

@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { commerce } from "./lib/commerce";
 import { Products, Navbar } from "./components";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
-import { Button } from "@mui/material";
-
-const theme = createTheme();
-const useStyles = makeStyles();
-
 function App() {
-  const classes = useStyles;
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = async () => {
+    const { data } = await commerce.products.list();
+
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <Navbar />
-        <Products />
-      </div>
-    </ThemeProvider>
+    <div>
+      <Navbar />
+      <Products products={products} />
+    </div>
   );
 }
 

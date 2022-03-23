@@ -7,40 +7,26 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-import { styled } from "@mui/material/styles";
 import logo from "../../assets/logo.png";
-// import useStyles from "./styles.js";
 
 const Navbar = () => {
-  const classes = styled();
-
   return (
-    <>
-      <AppBar position="fixed" className={classes.AppBar} color="inherit">
-        <Toolbar>
-          <Typography variant="h6" className="classes.title" color="inherit">
-            <img
-              src={logo}
-              alt="Cockasian.js"
-              height="25px"
-              className={classes.image}
-            />
-            Cockasian.js
-          </Typography>
-          <div className={classes.grow} />
-          <div classNameButton={classes.button}>
-            <IconButton aria-label="Show cart items" color="inherit">
-              <badge badgeContent={2} color="seconday">
-                <AddShoppingCartIcon />
-              </badge>
-            </IconButton>
-          </div>
+    <Box sx={{ display: "flex", flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <img src={logo} alt="Cockasian.js" height="50px" />
+          <IconButton aria-label="Show cart items" color="inherit">
+            <Badge badgeContent={2} color="secondary" variant="standard">
+              <AddShoppingCartIcon />
+            </Badge>
+          </IconButton>
         </Toolbar>
       </AppBar>
-    </>
+    </Box>
   );
 };
 
