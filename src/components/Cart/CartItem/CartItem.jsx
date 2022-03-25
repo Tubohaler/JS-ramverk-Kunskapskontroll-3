@@ -5,16 +5,24 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { useRecoilState } from "recoil";
+import { cartState } from "../../../stores/Cart/atom";
 
 const CartItem = ({ item }) => {
+  const [cartItems, setCartItems] = useRecoilState(cartState);
+  const deleteHandler = () => {
+    const newCartItems = [...cartItems].filter(
+      (cartItem) => cartItem.id !== item.id
+    );
+    setCartItems(newCartItems);
+  };
+
   return (
     <Card>
-      <CardMedia image={item.image.url} alt={item.name} />
+      <CardMedia image={item.image} alt={item.title} />
       <CardContent>
-        <Typography variant="h4">{item.name}</Typography>
-        <Typography variant="h5">
-          {item.line_total.fomatted_with_symboks}
-        </Typography>
+        <Typography variant="h4">{item.title}</Typography>
+        <Typography variant="h5">{item.price}$</Typography>
       </CardContent>
       <CardActions>
         <div>
@@ -26,7 +34,12 @@ const CartItem = ({ item }) => {
             +
           </Button>
         </div>
-        <Button variant="contained" type="button" color="secondary">
+        <Button
+          onClick={deleteHandler}
+          variant="contained"
+          type="button"
+          color="secondary"
+        >
           Remove
         </Button>
       </CardActions>

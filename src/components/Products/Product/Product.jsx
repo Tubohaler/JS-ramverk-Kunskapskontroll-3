@@ -7,24 +7,31 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useRecoilState } from "recoil";
+import { cartState } from "../../../stores/Cart/atom";
 
-const Product = ({ product, onAddToCart }) => {
+const Product = ({ product }) => {
+  const [itemsInCart, setItemsInCart] = useRecoilState(cartState);
+
+  function handleAddToCart() {
+    setItemsInCart([...itemsInCart, product]);
+  }
+  console.log(itemsInCart);
+
   return (
     <div>
       <Card>
         <CardMedia
-          image={product.image.url}
-          title={product.image.name}
+          image={product.image}
+          title={product.title}
           component="img"
         />
         <CardContent>
           <div>
             <Typography variant="h5" gutterBottom>
-              {product.name}
+              {product.title}
             </Typography>
-            <Typography variant="h5">
-              {product.price.formatted_with_symbol}
-            </Typography>
+            <Typography variant="h5">{product.price}</Typography>
           </div>
           <Typography
             dangerouslySetInnerHTML={{ __html: product.description }}
@@ -34,8 +41,8 @@ const Product = ({ product, onAddToCart }) => {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton
+            onClick={() => handleAddToCart()}
             aria-label="Add to the Cart"
-            onClick={() => onAddToCart(product.id, 1)}
           >
             <AddShoppingCartIcon />
           </IconButton>

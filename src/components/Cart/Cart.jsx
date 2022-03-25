@@ -4,8 +4,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import CartItem from "./CartItem/CartItem";
+import { useRecoilState } from "recoil";
+import { cartState } from "../../stores/Cart/atom";
 
-const Cart = ({ cart }) => {
+const Cart = () => {
+  const [cartItems, setCartItems] = useRecoilState(cartState);
   const EmptyCart = () => {
     <Typography variant="subtitle1">
       You have no stuff in the cart, go get some!
@@ -15,22 +18,21 @@ const Cart = ({ cart }) => {
   const FilledCart = () => (
     <>
       <Grid container spacing={3}>
-        {cart.line_items.map((item) => (
+        {cartItems.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
             <CartItem item={item} />{" "}
           </Grid>
         ))}
       </Grid>
       <div>
-        <Typography variant="h4">
-          Subtotal: {cart.subtotal.formatted_with_symbol}
-        </Typography>
+        <Typography variant="h4">Subtotal:</Typography>
         <div>
           <Button
             size="large"
             type="button"
             variant="contained"
             color="secondary"
+            onClick={() => setCartItems([])}
           >
             Empty Cart
           </Button>
@@ -47,7 +49,7 @@ const Cart = ({ cart }) => {
     </>
   );
 
-  if (!cart.line_items) return "loading...";
+  if (!cartItems) return "loading...";
 
   return (
     <Container>
@@ -55,7 +57,7 @@ const Cart = ({ cart }) => {
       <Typography variant="h3" gutterBottom>
         Your Shopping Cart
       </Typography>
-      {!cart.line_items ? <EmptyCart /> : <FilledCart />}
+      {!cartItems ? <EmptyCart /> : <FilledCart />}
     </Container>
   );
 };

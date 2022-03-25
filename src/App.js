@@ -1,47 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { commerce } from "./lib/commerce";
-import { Products, Navbar, Cart } from "./components";
+import { Home, Products, Navbar, Cart } from "./components";
+import IndividualProduct from "./components/Products/Product/IndividualProduct";
+import { useRecoilValue } from "recoil";
+import { cartState } from "./stores/Cart/atom";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
-
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-
-    setProducts(data);
-  };
-
-  const fetchCart = async () => {
-    setCart(await commerce.cart.retrieve());
-  };
-
-  const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-
-    setCart(item.cart);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-    fetchCart();
-  }, []);
+  // const [products, setProducts] = useState([]);
+  const itemsInCart = useRecoilValue(cartState);
 
   return (
-    <Router>
-      <div>
-        <Navbar totalItems={cart.total_items} />
-        <Routes>
-          <Route exact path="/" element={<Home />}>
-            <Products products={products} onAddToCart={handleAddToCart} />
-          </Route>
-          <Route exact path="/" element={<Cart />}>
-            <Cart cart={cart} />
-          </Route>
-        </Routes>
-      </div>
-    </Router>
+    <div>
+      <Navbar totalItems={itemsInCart.length} />
+
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+
+        <Route exact path="/products" element={<Products />} />
+        {/* <Products products={products} onAddToCart={handleAddToCart} />
+        </Route> */}
+        <Route exact path="/products/:id" element={<IndividualProduct />} />
+
+        <Route exact path="/cart" element={<Cart />} />
+      </Routes>
+    </div>
   );
 }
 
