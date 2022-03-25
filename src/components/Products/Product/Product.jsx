@@ -8,24 +8,35 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-const Product = ({ product }) => {
+const Product = ({ product, onAddToCart }) => {
   return (
     <div>
       <Card>
-        <CardMedia image={product.image} title={product.name} component="img" />
+        <CardMedia
+          image={product.image.url}
+          title={product.image.name}
+          component="img"
+        />
         <CardContent>
           <div>
             <Typography variant="h5" gutterBottom>
               {product.name}
             </Typography>
-            <Typography variant="h5">{product.price}</Typography>
+            <Typography variant="h5">
+              {product.price.formatted_with_symbol}
+            </Typography>
           </div>
-          <Typography variant="body2" color="textSecondary">
-            {product.description}
-          </Typography>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: product.description }}
+            variant="body2"
+            color="textSecondary"
+          />
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="Add to the Cart">
+          <IconButton
+            aria-label="Add to the Cart"
+            onClick={() => onAddToCart(product.id, 1)}
+          >
             <AddShoppingCartIcon />
           </IconButton>
         </CardActions>

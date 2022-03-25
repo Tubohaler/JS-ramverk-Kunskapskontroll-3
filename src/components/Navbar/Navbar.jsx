@@ -13,14 +13,18 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 import logo from "../../assets/logo.png";
 
-const Navbar = () => {
+const Navbar = ({ totalItems }) => {
   return (
     <Box sx={{ display: "flex", flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <img src={logo} alt="Cockasian.js" height="50px" />
           <IconButton aria-label="Show cart items" color="inherit">
-            <Badge badgeContent={2} color="secondary" variant="standard">
+            <Badge
+              badgeContent={totalItems}
+              color="secondary"
+              variant="standard"
+            >
               <AddShoppingCartIcon />
             </Badge>
           </IconButton>
