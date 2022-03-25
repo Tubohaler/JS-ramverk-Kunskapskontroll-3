@@ -1,13 +1,11 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import Grid from "@mui/material/Grid";
 
 import Product from "./Product/Product";
 import { productState } from "../../stores/products/atom";
 
 const Products = () => {
   const products = useRecoilValue(productState);
-  console.log(products);
   if (!products) return <div>loading...</div>;
   return (
     <div>

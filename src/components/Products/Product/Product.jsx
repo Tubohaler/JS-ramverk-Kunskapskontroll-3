@@ -16,7 +16,6 @@ const Product = ({ product }) => {
   function handleAddToCart() {
     setItemsInCart([...itemsInCart, product]);
   }
-  console.log(itemsInCart);
 
   return (
     <div>

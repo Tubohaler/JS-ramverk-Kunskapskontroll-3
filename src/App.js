@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { commerce } from "./lib/commerce";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import { Home, Products, Navbar, Cart } from "./components";
 import IndividualProduct from "./components/Products/Product/IndividualProduct";
 import { useRecoilValue } from "recoil";
@@ -18,8 +17,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
 
         <Route exact path="/products" element={<Products />} />
-        {/* <Products products={products} onAddToCart={handleAddToCart} />
-        </Route> */}
+
         <Route exact path="/products/:id" element={<IndividualProduct />} />
 
         <Route exact path="/cart" element={<Cart />} />
